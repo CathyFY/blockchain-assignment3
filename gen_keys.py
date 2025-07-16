@@ -23,7 +23,7 @@ def sign_message(challenge, filename="secret_key.txt"):
     # Use the code from the signatures assignment to sign the given challenge
     private_key = key[0].strip()
     signed_message = eth_account.Account.sign_message(message, private_key)
-    eth_addr = signed_message.address
+    eth_addr = eth_account.Account.from_key(private_key).address
 
 
     assert eth_account.Account.recover_message(message,signature=signed_message.signature.hex()) == eth_addr, f"Failed to sign message properly"
